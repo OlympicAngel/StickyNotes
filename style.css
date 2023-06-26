@@ -25,6 +25,7 @@ form {
     max-width: 90%;
     min-width: 360px;
     margin: auto;
+    box-sizing: border-box;
 }
 
 form div {
