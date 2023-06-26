@@ -19,7 +19,7 @@ function newNote(event) {
     //create new note;
     new Note(MessageInput.value, dateTimeInput.value)
     MessageInput.value = ""
-    dateTimeInput.value = ""
+    dateTimeInput.value = new Date().toISOString().split(".")[0]
 
 }
 
