@@ -1,0 +1,25 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StickyNotes App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>StickyNotes App</h1>
+    <form onsubmit="newNote(event)">
+        <div>
+            <textarea id="note_input" required placeholder="'Do my hOmEwOrK!!!!11!1!'
+or other note.."></textarea>
+            <input id="dateTime_input" required type="datetime-local" min="2018-06-0700:00" value="2018-06-12T19:30">
+        </div>
+        <button>Create</button>
+    </form>
+    <div id="notes"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
