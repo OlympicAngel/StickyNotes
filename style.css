@@ -160,7 +160,7 @@ button {
     position: absolute;
     top: 1.2em;
     left: 0;
-    font-size: min(0.75em, 1vmin);
+    font-size: max(min(0.75em, 1vmin), 6px);
     width: 100%;
     text-align: left;
     font-weight: 900;
