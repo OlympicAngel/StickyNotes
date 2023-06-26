@@ -1,5 +1,5 @@
 body {
-    background: url("/img/background.jpg");
+    background: url("./img/background.jpg");
     background-size: cover;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     direction: ltr;
@@ -101,7 +101,7 @@ button {
 .note::before {
     --deg: -3deg;
     content: "";
-    background-image: url(/img/note.png);
+    background-image: url(./img/note.png);
     background-size: 100%;
     width: 100%;
     height: 100%;
