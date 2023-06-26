@@ -7,7 +7,6 @@ const dateTimeInput = document.getElementById("dateTime_input")
 const MessageInput = document.getElementById("note_input")
 //format current time
 const now = new Date().toISOString().split(".")[0]
-dateTimeInput.value = now;
 dateTimeInput.min = now;
 
 /**
@@ -18,6 +17,9 @@ function newNote(event) {
     event.preventDefault();
     //create new note;
     new Note(MessageInput.value, dateTimeInput.value)
+    MessageInput.value = ""
+    dateTimeInput.value = ""
+
 }
 
 class Note {
