@@ -8,6 +8,7 @@ const MessageInput = document.getElementById("note_input")
 //format current time
 const now = new Date().toISOString().split(".")[0]
 dateTimeInput.min = now;
+dateTimeInput.value = now;
 
 /**
  * on new form submit
