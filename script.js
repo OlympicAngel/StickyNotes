@@ -2,13 +2,12 @@ const noteList = [];
 const appendNotesTo = document.getElementById("notes"); //new notes will be added to this
 
 //set current time as the min time for timedate input
-/** @type {HTMLInputElement} */
+/** @type {HTMLDateT} */
 const dateTimeInput = document.getElementById("dateTime_input")
 const MessageInput = document.getElementById("note_input")
 //format current time
-const now = new Date().toISOString().split(".")[0]
-dateTimeInput.min = now;
-dateTimeInput.value = now;
+dateTimeInput.value = currentDateTime();
+dateTimeInput.min = currentDateTime();
 
 /**
  * on new form submit
@@ -18,22 +17,31 @@ function newNote(event) {
     event.preventDefault();
     //create new note;
     new Note(MessageInput.value, dateTimeInput.value)
-    MessageInput.value = ""
-    dateTimeInput.value = new Date().toISOString().split(".")[0]
+    MessageInput.value = "" //reset textarea input
 
+    //resets current time
+    dateTimeInput.value = currentDateTime();
+    dateTimeInput.min = currentDateTime();
+}
+
+function currentDateTime() {
+    return new Date().toISOString().split(":").slice(0, 2).join(":");
 }
 
 class Note {
     constructor(body, date) {
         this.body = body;
         this.date = date;
+        const rndID = (Math.random() + Math.random()).toString(20).replace(".", "");
 
         //create html note
         this.el = document.createElement("div");
-        this.el.className = "note";
-        this.el.innerHTML = `<span class="noteDelete">X</span>
-        <p>${this.body}</p>
-        <span class="noteDate">${new Date(this.date).toLocaleString()}</span>`;
+        this.el.innerHTML = `<input type=checkbox name="noteSelection" id="${rndID}">
+        <label class="note" for="${rndID}">
+            <span class="noteDelete">X</span>
+            <p>${this.body}</p>
+            <span class="noteDate">${new Date(this.date).toLocaleString()}</span>
+        </label>`;
 
         //hook remove note event
         this.el.querySelector("span.noteDelete").addEventListener("click", this.deleteNote.bind(this), { "once": true })
@@ -49,7 +57,7 @@ class Note {
         this.el.remove();//remove html content
         //remove from global list 
         noteList.find((aNote, index) => {
-            const isCurrentNote = aNote == this; //match current note
+            const isCurrentNote = (aNote == this); //match current note
             if (isCurrentNote) //if current
                 noteList.splice(index, 1) //remove from array
             return isCurrentNote; //return true if current prevent iterating over other items

@@ -64,6 +64,43 @@ button {
     z-index: 2;
 }
 
+input[name="noteSelection"] {
+    display: none;
+}
+
+input[name="noteSelection"]:checked+.note::after {
+    content: "";
+    width: 150vmax;
+    height: 150vmax;
+    background-color: black;
+    display: block;
+    position: absolute;
+    left: -50vmax;
+    top: -50vmax;
+    z-index: -2;
+    opacity: 0.7;
+    cursor: zoom-out;
+}
+
+input[name="noteSelection"]:checked+.note {
+    transition: transform 0.2s;
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    margin: auto;
+    width: 50vmin;
+    max-width: none;
+    font-size: 2em;
+    --deg: -3deg;
+    transform: rotate(var(--deg)) !important;
+    filter: drop-shadow(-0.5em 1.5em 0.4em rgba(0, 0, 0, 0.75));
+    cursor: initial;
+}
+
+input[name="noteSelection"]:checked+.note .noteDate {
+    font-size: max(min(0.4em, 20vmin), 11px);
+}
+
 #notes {
     display: flex;
     gap: 1em;
@@ -78,6 +115,7 @@ button {
 .note {
     --scale: 1.01;
     --deg: -3deg;
+    display: block;
     aspect-ratio: 1;
     position: relative;
     transform: rotate(var(--deg)) scale(var(--scale));
@@ -86,9 +124,15 @@ button {
     max-width: 20vw;
     min-width: 100px;
     width: 25vmin;
-    transition: 0.3s;
+    transition: transform 0.3s, filter 0.3s;
     z-index: 0;
     filter: drop-shadow(0 0 0.5em rgba(0, 0, 0, 0.5));
+}
+
+.note::after {
+    content: "";
+    background-color: transparent;
+    transition: background-color 0.1s;
 }
 
 .note:nth-child(3n) {
@@ -102,7 +146,7 @@ button {
 .note::before {
     --deg: -3deg;
     content: "";
-    background-image: url(./img/note.png);
+    background-image: url(./img/note.webp);
     background-size: 100%;
     width: 100%;
     height: 100%;
@@ -120,6 +164,7 @@ button {
     --scale: 1.1;
     filter: drop-shadow(-1em 2em 1em rgba(0, 0, 0, 0.6));
     z-index: 1;
+    cursor: zoom-in;
 }
 
 .note p {
@@ -142,9 +187,9 @@ button {
     aspect-ratio: 1;
     display: inline-block;
     position: absolute;
-    top: 0em;
+    top: 0.3em;
     right: -0.5em;
-    width: 1.5em;
+    width: 1.4em;
     text-align: center;
 }
 
