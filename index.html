@@ -17,7 +17,16 @@ or other note.."></textarea>
         </div>
         <button>Create</button>
     </form>
-    <div id="notes"></div>
+
+    <div class="searchBox">
+        <label for="search">Search notes:</label>
+        <input id="search" oninput="searchNotes(event)">
+    </div>
+
+    <div id="notes">
+
+
+    </div>
 
     <script src="script.js"></script>
 </body>

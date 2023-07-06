@@ -24,6 +24,17 @@ function newNote(event) {
     dateTimeInput.min = currentDateTime();
 }
 
+function searchNotes(e) {
+    const value = e.target.value;
+    noteList.forEach(note => {
+        if (value == "") {
+            note.show();
+            return;
+        }
+        note[note.body.includes(value) ? "show" : "hide"]()
+    })
+}
+
 function currentDateTime() {
     return new Date().toISOString().split(":").slice(0, 2).join(":");
 }
@@ -63,6 +74,14 @@ class Note {
             return isCurrentNote; //return true if current prevent iterating over other items
         });
         localStorage.noteList = JSON.stringify(noteList);
+    }
+
+    hide() {
+        this.el.classList.add("hidden")
+    }
+
+    show() {
+        this.el.classList.remove("hidden")
     }
 }
 
