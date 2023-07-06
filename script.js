@@ -50,12 +50,19 @@ class Note {
         this.el.innerHTML = `<input type=checkbox name="noteSelection" id="${rndID}">
         <label class="note" for="${rndID}">
             <span class="noteDelete">X</span>
-            <p>${this.body}</p>
+            <p contenteditable="true">${this.body}</p>
             <span class="noteDate">${new Date(this.date).toLocaleString()}</span>
         </label>`;
 
         //hook remove note event
         this.el.querySelector("span.noteDelete").addEventListener("click", this.deleteNote.bind(this), { "once": true })
+        const p = this.el.querySelector(".note p");
+        p.addEventListener("click", this.p_click.bind(this))
+        p.addEventListener("blur", () => {
+            this.body = p.innerText;
+            localStorage.noteList = JSON.stringify(noteList);
+        })
+
 
         appendNotesTo.appendChild(this.el); //add to html dom
 
@@ -74,6 +81,15 @@ class Note {
             return isCurrentNote; //return true if current prevent iterating over other items
         });
         localStorage.noteList = JSON.stringify(noteList);
+    }
+
+    p_click(e) {
+        const checkbox = this.el.querySelector("input[name=noteSelection]");
+        const isFullscreen = checkbox.checked;
+        if (isFullscreen) {
+            e.preventDefault();
+
+        }
     }
 
     hide() {
